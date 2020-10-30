@@ -23,7 +23,7 @@ class User(AbstractBaseUser):
                                        verbose_name=_('Activation Code'))
     email = models.EmailField(unique=True, null=True, blank=True)
     date_joined = models.DateField(auto_now_add=True, verbose_name=_('Date joined'))
-    player_id = models.CharField(max_length=255, blank=True)
+    player_id = models.CharField(max_length=255, unique=True)
     link_code = models.CharField(max_length=8, unique=True, null=True, blank=True)
 
     is_active = models.BooleanField(default=False, verbose_name=_('is active'))
@@ -32,7 +32,7 @@ class User(AbstractBaseUser):
     objects = UserManager()
 
     USERNAME_FIELD = 'phone'
-    REQUIRED_FIELDS = ['name']
+    REQUIRED_FIELDS = ['name', 'player_id']
 
     class Meta:
         verbose_name = _('User')
