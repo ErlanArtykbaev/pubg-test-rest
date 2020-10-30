@@ -32,21 +32,21 @@ class User(AbstractBaseUser):
     objects = UserManager()
 
     USERNAME_FIELD = 'phone'
-    REQUIRED_FIELDS = ['name', 'player_id']
+    REQUIRED_FIELDS = ['player_id']
 
     class Meta:
         verbose_name = _('User')
         verbose_name_plural = _('Users')
 
     def __str__(self):
-        return f'{self.name} {self.phone}'
+        return f'{self.name}-{self.phone}'
 
     @classmethod
     def create(cls, phone, password, is_sms_activated=True, **kwargs):
         user = cls(phone=phone, **kwargs)
         user.set_password(password)
         user.activation_code = get_random_string(6, '0123456789')
-        user.save(is_sms_activation=is_sms_activated)
+        user.save()
         return user
 
     def create_new_password(self, password):

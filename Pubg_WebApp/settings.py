@@ -45,11 +45,24 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #3rd party apps
     'rest_framework',
+    'rest_framework.renderers',
     'rest_framework.authtoken',
-    'accounts'
-]
+    'accounts',
+    'drf_yasg',
+    'psycopg2',
+    'rabbit',
+    'html5lib',
+    'asgiref',
 
+
+]
+SWAGGER_SETTINGS = {
+
+    'VALIDATOR_URL': 'http://localhost:8100',
+
+}
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -107,7 +120,7 @@ DATABASES = {
         'NAME': 'pubgalpha',
         'USER': 'admin',
         'PASSWORD': 'admin',
-        'HOST': 'postgres',
+        'HOST': 'localhost',
         'PORT': '5432'
     }
 }

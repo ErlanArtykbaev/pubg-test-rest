@@ -131,7 +131,7 @@ class RegisterView(APIView):
             user = serializer.save()
             if user:
                 return Response({'status': 'success'}, status=status.HTTP_201_CREATED)
-        print(request.data)
+
 
 class VerifyActivationCodeView(APIView):
     def post(self, request):
@@ -148,6 +148,7 @@ class VerifyActivationCodeView(APIView):
             return Response(status=400, data=result['data'])
 
         return Response({'status': 'success'})
+
 
 class ValidatePassword(APIView):
     def post(self, request):
