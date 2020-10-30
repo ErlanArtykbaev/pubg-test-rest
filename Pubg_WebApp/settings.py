@@ -118,10 +118,17 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'pubgalpha',
-        'USER': 'admin',
-        'PASSWORD': 'admin',
+
+#         'USER': 'admin',
+#         'PASSWORD': 'admin',
+#         'HOST': 'localhost',
+#         'PORT': '5432'
+
+        'USER': 'newuser',
+        'PASSWORD': 'liderkgz',
         'HOST': 'localhost',
-        'PORT': '5432'
+        'PORT': 5432
+
     }
 }
 
