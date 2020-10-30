@@ -46,7 +46,8 @@ class User(AbstractBaseUser):
         user = cls(phone=phone, **kwargs)
         user.set_password(password)
         user.activation_code = get_random_string(6, '0123456789')
-        user.save(is_sms_activation=is_sms_activated)
+        user.save()
+        # user.save()
         return user
 
     def create_new_password(self, password):
