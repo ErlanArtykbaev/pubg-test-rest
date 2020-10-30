@@ -21,9 +21,9 @@ class User(AbstractBaseUser):
 
     activation_code = models.CharField(max_length=6, blank=True,
                                        verbose_name=_('Activation Code'))
-
+    email = models.EmailField(unique=True, null=True, blank=True)
     date_joined = models.DateField(auto_now_add=True, verbose_name=_('Date joined'))
-    device_id = models.CharField(max_length=255, blank=True)
+    player_id = models.CharField(max_length=255, blank=True)
     link_code = models.CharField(max_length=8, unique=True, null=True, blank=True)
 
     is_active = models.BooleanField(default=False, verbose_name=_('is active'))
