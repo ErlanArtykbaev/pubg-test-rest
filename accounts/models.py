@@ -23,7 +23,7 @@ class User(AbstractBaseUser):
                                        verbose_name=_('Activation Code'))
     email = models.EmailField(unique=True, null=True, blank=True)
     date_joined = models.DateField(auto_now_add=True, verbose_name=_('Date joined'))
-    player_id = models.CharField(max_length=255, blank=True)
+    player_id = models.CharField(max_length=255, unique=True)
     link_code = models.CharField(max_length=8, unique=True, null=True, blank=True)
 
     is_active = models.BooleanField(default=False, verbose_name=_('is active'))
@@ -32,14 +32,14 @@ class User(AbstractBaseUser):
     objects = UserManager()
 
     USERNAME_FIELD = 'phone'
-    REQUIRED_FIELDS = ['name']
+    REQUIRED_FIELDS = ['player_id']
 
     class Meta:
         verbose_name = _('User')
         verbose_name_plural = _('Users')
 
     def __str__(self):
-        return f'{self.name} {self.phone}'
+        return f'{self.name}-{self.phone}'
 
     @classmethod
     def create(cls, phone, password, is_sms_activated=True, **kwargs):
@@ -47,7 +47,6 @@ class User(AbstractBaseUser):
         user.set_password(password)
         user.activation_code = get_random_string(6, '0123456789')
         user.save()
-        # user.save()
         return user
 
     def create_new_password(self, password):
