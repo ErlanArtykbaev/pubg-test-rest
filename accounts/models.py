@@ -1,4 +1,4 @@
-from datetime import timezone
+import datetime
 
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.db import models
@@ -79,7 +79,7 @@ class User(AbstractBaseUser):
         return True
 
     def save_last_login(self):
-        self.last_login = timezone.now()
+        self.last_login = datetime.datetime.now()
         self.save()
 
     def has_perm(self, perm, obj=None):
