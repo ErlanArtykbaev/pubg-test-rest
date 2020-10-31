@@ -1,8 +1,13 @@
+from django.http import HttpResponse
+from requests import Response
 from rest_framework import serializers
 from django.utils.translation import gettext as _
+from rest_framework.renderers import JSONRenderer
 
 from accounts.models import User
 from accounts.utils import normalize_phone
+
+renderer_classes = [JSONRenderer]
 
 
 class UserMeSerializer(serializers.ModelSerializer):
@@ -10,7 +15,7 @@ class UserMeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        exclude = ('activation_code', 'password', )
+        exclude = ('activation_code', 'password')
 
     def validate_phone(self, value):
         phone = normalize_phone(value)
@@ -68,7 +73,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('phone', 'name', 'password', )
+        fields = ('phone', 'password', 'name')
 
     def validate_phone(self, value):
         phone = normalize_phone(value)
@@ -77,6 +82,6 @@ class RegisterSerializer(serializers.ModelSerializer):
         return phone
 
     def create(self, validated_data):
-        instance = User.create(validated_data['phone'], validated_data['password'], name=validated_data['name'])
+        instance = User.create(validated_data['phone'], validated_data['password'], validated_data['name'])
         instance.save(update_fields=['activation_code'])
         return instance
