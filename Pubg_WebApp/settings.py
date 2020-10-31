@@ -50,7 +50,6 @@ INSTALLED_APPS = [
     'rest_framework.renderers',
     'rest_framework.authtoken',
     'accounts',
-    'drf_yasg',
     'psycopg2',
     'rabbit',
     'html5lib',
@@ -117,17 +116,17 @@ FCM_API_KEY = config['mobile.FCM_API_KEY']
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'pubgalpha',
+        'NAME': 'pubgbeta',
 
-#         'USER': 'admin',
-#         'PASSWORD': 'admin',
-#         'HOST': 'localhost',
-#         'PORT': '5432'
-
-        'USER': 'newuser',
-        'PASSWORD': 'liderkgz',
+        'USER': 'admin',
+        'PASSWORD': 'admin',
         'HOST': 'localhost',
-        'PORT': 5432
+        'PORT': '5432'
+
+        # 'USER': 'newuser',
+        # 'PASSWORD': 'liderkgz',
+        # 'HOST': 'localhost',
+        # 'PORT': 5432
 
     }
 }

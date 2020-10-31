@@ -17,7 +17,7 @@ class User(AbstractBaseUser):
     contact_number = models.CharField(max_length=100, blank=True,
                                       verbose_name=_('Contact Number'))
     balance = models.DecimalField(max_digits=14, decimal_places=2, default=0,
-                                  verbose_name=_('Name'))
+                                  verbose_name=_('balance'))
 
     activation_code = models.CharField(max_length=6, blank=True,
                                        verbose_name=_('Activation Code'))
@@ -32,7 +32,7 @@ class User(AbstractBaseUser):
     objects = UserManager()
 
     USERNAME_FIELD = 'phone'
-    REQUIRED_FIELDS = ['player_id']
+    REQUIRED_FIELDS = ['name', 'player_id']
 
     class Meta:
         verbose_name = _('User')
