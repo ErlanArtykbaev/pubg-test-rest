@@ -82,6 +82,6 @@ class RegisterSerializer(serializers.ModelSerializer):
         return phone
 
     def create(self, validated_data):
-        instance = User.create(validated_data['phone'], validated_data['password'], validated_data['name'])
+        instance = User.create(validated_data['phone'], validated_data['name'], validated_data['password'], )
         instance.save(update_fields=['activation_code'])
         return instance

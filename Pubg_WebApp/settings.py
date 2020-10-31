@@ -25,8 +25,8 @@ SECRET_KEY = 'z-%_f7o3omh513p++l=!5w)!-tp10*-$_7ccpb$f06uz_u20cr'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['*']
+CORS_ORIGIN_ALLOW_ALL=True
 config = {
     'mobile.FCM_API_KEY': os.environ.get('DJ_FCM_KEY', 'KEY'),
     'celery.broker_host': os.environ.get('CELERY_BROKER_HOST', 'rabbit'),
@@ -47,14 +47,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #3rd party apps
     'rest_framework',
+    # 'rest_framework_swagger',
     'rest_framework.renderers',
     'rest_framework.authtoken',
     'accounts',
-    'drf_yasg',
     'psycopg2',
     'rabbit',
     'html5lib',
     'asgiref',
+    'corsheaders'
 
 
 ]
@@ -71,6 +72,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'Pubg_WebApp.urls'
@@ -78,8 +81,7 @@ ROOT_URLCONF = 'Pubg_WebApp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
-        ,
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -95,9 +97,11 @@ TEMPLATES = [
 WSGI_APPLICATION = 'Pubg_WebApp.wsgi.application'
 
 REST_FRAMEWORK = {
+    # 'DEFAULT_SCHEMA_CLASS': ('rest_framework.schemas.coreapi.AutoSchema'),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
+
     ),
 }
 # sms-sender
@@ -117,17 +121,17 @@ FCM_API_KEY = config['mobile.FCM_API_KEY']
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'pubgalpha',
+        'NAME': 'pubgbeta',
 
-#         'USER': 'admin',
-#         'PASSWORD': 'admin',
-#         'HOST': 'localhost',
-#         'PORT': '5432'
-
-        'USER': 'newuser',
-        'PASSWORD': 'liderkgz',
+        'USER': 'admin',
+        'PASSWORD': 'admin',
         'HOST': 'localhost',
-        'PORT': 5432
+        'PORT': '5432'
+
+        # 'USER': 'newuser',
+        # 'PASSWORD': 'liderkgz',
+        # 'HOST': 'localhost',
+        # 'PORT': 5432
 
     }
 }
@@ -173,3 +177,4 @@ STATIC_URL = '/static/'
 AUTH_USER_MODEL = 'accounts.User'
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL='users/activate/'
