@@ -35,3 +35,4 @@ urllib3==1.25.11
 virtualenv==20.1.0
 webencodings==0.5.1
 psycopg2==2.8.6
+whitenoise==3.2
